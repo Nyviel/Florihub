@@ -1,7 +1,12 @@
+import { columns } from "../columns/userColumns";
+import { DataTable } from "../dataTable";
+import userData from "@/stubuserdata.json";
+
 const DashboardUsers = () => {
+	const data = userData;
 	return (
-		<div className="w-full h-full flex flex-col bg-green-900">
-			dashboardUsers
+		<div className="w-full h-full bg-green-900 p-5">
+			<DataTable columns={columns} data={data} />
 		</div>
 	);
 };
