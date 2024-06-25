@@ -1,5 +1,5 @@
 import { columns } from "../columns/userColumns";
-import { DataTable } from "../dataTable";
+import { DataTable } from "../DataTable";
 import userData from "@/stubuserdata.json";
 
 const DashboardUsers = () => {

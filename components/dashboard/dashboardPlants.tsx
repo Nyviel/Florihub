@@ -1,5 +1,5 @@
 import { columns } from "../columns/plantColumns";
-import { DataTable } from "../dataTable";
+import { DataTable } from "../DataTable";
 import plantData from "@/stubplantsdata.json";
 
 const DashboardPlants = () => {

@@ -2,8 +2,9 @@
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import Typewriter from "typewriter-effect";
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, use, useEffect, useState } from "react";
 import { fetchPlantNames } from "@/services/plantService";
+import { toast } from "react-toastify";
 
 const inputFieldStyling = {
 	"& .MuiInputBase-root": {
@@ -38,7 +39,7 @@ const inputFieldStyling = {
 	},
 };
 
-const Hero = () => {
+const Home = () => {
 	const words = [
 		"Aloe",
 		"Agave",
@@ -146,4 +147,4 @@ const Hero = () => {
 		</section>
 	);
 };
-export default Hero;
+export default Home;
