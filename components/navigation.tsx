@@ -1,8 +1,18 @@
 "use client";
 
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 const Navigation = () => {
+	const { data: session } = useSession();
+	const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+	useEffect(() => {
+		if (session && session.user) {
+			setIsAuthenticated(true);
+		}
+	}, [session]);
 	return (
 		<header>
 			<div className="w-full flex items-center bg-green-950 p-5">
@@ -24,12 +34,41 @@ const Navigation = () => {
 						<Link href="/contact" className="hover:cursor-pointer">
 							Contact
 						</Link>
-						<Link href="/login" className="hover:cursor-pointer">
-							Login
-						</Link>
-						<Link href="/register" className="hover:cursor-pointer">
-							Register
-						</Link>
+						{isAuthenticated ? (
+							<>
+								<Link
+									href="/profile"
+									className="hover:cursor-pointer"
+								>
+									Profile
+								</Link>
+								<Link
+									href="#"
+									onClick={() => {
+										setIsAuthenticated(false);
+										signOut();
+									}}
+									className="hover:cursor-pointer"
+								>
+									Logout
+								</Link>
+							</>
+						) : (
+							<>
+								<Link
+									href="/auth/login"
+									className="hover:cursor-pointer"
+								>
+									Login
+								</Link>
+								<Link
+									href="/auth/register"
+									className="hover:cursor-pointer"
+								>
+									Register
+								</Link>
+							</>
+						)}
 					</ul>
 				</nav>
 			</div>
