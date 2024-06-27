@@ -54,18 +54,15 @@ const Home = () => {
 		"Maranta",
 		"And many others to explore",
 	];
-	const [plantTitles, setPlantTitles] = useState<string[]>(["Aloe"]);
+	const [plantTitles, setPlantTitles] = useState<string[]>([""]);
 	const [value, setValue] = useState<string | null>(plantTitles[0]);
 
 	useEffect(() => {
 		const getPlantNames = async () => {
 			const res = await fetchPlantNames();
 
-			if (res.ok) {
-				const data = await res.json();
-				if (data && data.length > 0) {
-					setPlantTitles(data);
-				}
+			if (res && res.length > 0) {
+				setPlantTitles(res);
 			}
 		};
 		getPlantNames();

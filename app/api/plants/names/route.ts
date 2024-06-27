@@ -8,7 +8,11 @@ export const GET = async (request: NextRequest) => {
 		await connectDB();
 
 		const plantNames = await Plant.find({}, "name");
-		return new Response(JSON.stringify(plantNames), {
+		const plainArray = [];
+		for (const plant of plantNames) {
+			plainArray.push(plant?.name);
+		}
+		return new Response(JSON.stringify(plainArray), {
 			status: 200,
 		});
 	} catch (error) {
