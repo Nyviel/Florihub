@@ -5,6 +5,7 @@ import Typewriter from "typewriter-effect";
 import { FormEvent, use, useEffect, useState } from "react";
 import { fetchPlantNames } from "@/services/plantService";
 import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 const inputFieldStyling = {
 	"& .MuiInputBase-root": {
@@ -56,13 +57,18 @@ const Home = () => {
 	];
 	const [plantTitles, setPlantTitles] = useState<string[]>([""]);
 	const [value, setValue] = useState<string | null>(plantTitles[0]);
-
+	const router = useRouter();
 	useEffect(() => {
 		const getPlantNames = async () => {
-			const res = await fetchPlantNames();
+			try {
+				const res = await fetchPlantNames();
 
-			if (res && res.length > 0) {
-				setPlantTitles(res);
+				if (res && res.length > 0) {
+					setPlantTitles(res);
+				}
+			} catch (error) {
+				console.error(error);
+				toast.error("Failed to fetch plant names");
 			}
 		};
 		getPlantNames();
@@ -70,7 +76,8 @@ const Home = () => {
 
 	const handleFormSubmit = (event: FormEvent) => {
 		event.preventDefault();
-		console.log(value);
+
+		router.push(`/explore?search=${value}`);
 	};
 
 	return (

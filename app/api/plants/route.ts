@@ -7,8 +7,29 @@ export const GET = async (request: NextRequest) => {
 	try {
 		await connectDB();
 
-		const plants = await Plant.find();
-		return new Response(JSON.stringify(plants), {
+		const query = request.nextUrl.searchParams.get("search") || "";
+		const page: number =
+			Number(request.nextUrl.searchParams.get("page")) || 1;
+		const pageSize: number =
+			Number(request.nextUrl.searchParams.get("pageSize")) || 9;
+
+		const skip: number = (page - 1) * pageSize;
+		const total = await Plant.countDocuments();
+
+		const queryPattern = new RegExp(query, "i");
+		let q = {
+			$or: [
+				{ name: queryPattern },
+				{ description: queryPattern },
+				{ type: queryPattern },
+				{ family: queryPattern },
+				{ tags: queryPattern },
+			],
+		};
+
+		const plants = await Plant.find(q).skip(skip).limit(pageSize);
+
+		return new Response(JSON.stringify({ plants, total }), {
 			status: 200,
 		});
 	} catch (error) {
