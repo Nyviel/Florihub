@@ -1,4 +1,5 @@
 import { User, UserPost } from "@/interfaces/user";
+import { Session } from "next-auth";
 
 const API = "http://localhost:3000/api";
 

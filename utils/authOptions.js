@@ -21,7 +21,12 @@ export const authOptions = {
 				}
 
 				if (user && pwdMatch) {
-					return user;
+					return {
+						id: user.id,
+						email: user.email,
+						name: user.name,
+						isAdmin: user.isAdmin,
+					};
 				} else {
 					return null;
 				}
@@ -29,16 +34,23 @@ export const authOptions = {
 		}),
 	],
 	callbacks: {
-		async session({ session, token, user }) {
-			console.log("session, token, user: ", session, token, user);
-			if (token && token.sub) {
-				session.user.id = token.sub;
+		async jwt({ token, user }) {
+			if (user) {
+				token.id = user.id;
+				token.email = user.email;
+				token.isAdmin = user.isAdmin;
+				token.name = user.name;
 			}
+			return token;
+		},
+
+		async session({ session, token }) {
+			session.id = token.id;
+			session.email = token.email;
+			session.name = token.name;
+			session.isAdmin = token.isAdmin;
 			return session;
 		},
 	},
 	secret: process.env.NEXTAUTH_SECRET,
-	pages: {
-		signIn: "/auth/login",
-	},
 };

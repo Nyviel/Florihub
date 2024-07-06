@@ -1,19 +1,26 @@
-import { Schema, model, models } from "mongoose";
+import { Model, Schema, model, models } from "mongoose";
 
-const UserSchema = new Schema(
+export interface IUser extends Document {
+	email: string;
+	name: string;
+	password: string;
+	isAdmin: boolean;
+}
+
+const UserSchema = new Schema<IUser>(
 	{
 		email: {
 			type: String,
-			unique: [true, "Email already exists"],
-			required: [true, "Email is required"],
+			unique: true,
+			required: true,
 		},
 		name: {
 			type: String,
-			required: [true, "User name is required"],
+			required: true,
 		},
 		password: {
 			type: String,
-			required: [true, "Password is required"],
+			required: true,
 		},
 		isAdmin: {
 			type: Boolean,
@@ -25,5 +32,5 @@ const UserSchema = new Schema(
 	}
 );
 
-const User = models.User || model("User", UserSchema);
+const User: Model<IUser> = models.User || model<IUser>("User", UserSchema);
 export default User;

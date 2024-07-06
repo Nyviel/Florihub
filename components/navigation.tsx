@@ -7,12 +7,17 @@ import { useEffect, useState } from "react";
 const Navigation = () => {
 	const { data: session } = useSession();
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
+	const [isAdmin, setIsAdmin] = useState(false);
 
 	useEffect(() => {
 		if (session && session.user) {
 			setIsAuthenticated(true);
+			if (session.isAdmin) {
+				setIsAdmin(true);
+			}
 		}
 	}, [session]);
+
 	return (
 		<header>
 			<div className="w-full flex items-center bg-green-950 p-5">
@@ -34,6 +39,16 @@ const Navigation = () => {
 						<Link href="/contact" className="hover:cursor-pointer">
 							Contact
 						</Link>
+						{isAdmin && (
+							<>
+								<Link
+									href="/dashboard"
+									className="hover:cursor-pointer"
+								>
+									Dashboard
+								</Link>
+							</>
+						)}
 						{isAuthenticated ? (
 							<>
 								<Link
