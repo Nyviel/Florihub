@@ -81,7 +81,7 @@ const Home = () => {
 	};
 
 	return (
-		<section className="text-white flex flex-col md:flex-row h-full items-center justify-center">
+		<section className="text-white flex flex-col md:flex-row h-screen items-center justify-center">
 			<div className="flex flex-col w-full h-full text-center justify-center bg-green-900">
 				<div className="flex flex-col justify-center items-center h-1/4 w-full -mt-20">
 					<div className="h-24">

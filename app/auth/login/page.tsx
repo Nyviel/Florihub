@@ -36,13 +36,13 @@ const LoginPage = () => {
 		}
 	};
 	return (
-		<section className="h-full w-full flex">
+		<section className="min-h-screen w-full flex">
 			<div className="w-full md:w-1/2 lg:w-1/4 flex justify-center items-start pt-12 bg-green-900">
 				<form
 					onSubmit={(e) => {
 						handleFormSubmit(e);
 					}}
-					className="mx-6 p-6  h-1/2 space-y-8 bg-green-700 rounded-lg shadow shadow-green-950"
+					className="mx-6 p-6 h-fit space-y-8 bg-green-700 rounded-lg shadow shadow-green-950"
 				>
 					<h2 className="text-3xl text-center font-semibold mb-6 text-white">
 						Login
@@ -57,7 +57,7 @@ const LoginPage = () => {
 							type="email"
 							id="email"
 							name="email"
-							placeholder="Enter email address..."
+							placeholder="Email address..."
 							required
 							onChange={(e) => {
 								setEmail(e.target.value);
@@ -68,7 +68,7 @@ const LoginPage = () => {
 							type="password"
 							id="password"
 							name="password"
-							placeholder="Enter password..."
+							placeholder="Password..."
 							required
 							onChange={(e) => {
 								setPassword(e.target.value);

@@ -24,7 +24,9 @@ export default function RootLayout({
 			<html lang="en" suppressHydrationWarning={true}>
 				<body className={`${inter.className} antialiased`}>
 					<Navigation />
-					<main className="h-full w-full">{children}</main>
+					<main className="min-h-full w-full bg-green-900">
+						{children}
+					</main>
 					<Footer />
 					<ToastContainer
 						position="bottom-right"

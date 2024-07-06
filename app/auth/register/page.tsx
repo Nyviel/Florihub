@@ -45,7 +45,7 @@ const RegisterPage = () => {
 		}
 	};
 	return (
-		<section className="h-full w-full flex">
+		<section className="min-h-screen w-full flex">
 			<div className="w-full sm:w-1/2 xl:w-1/3 h-full flex justify-center items-start pt-12 bg-green-900 order-2">
 				<form
 					onSubmit={(e) => {
@@ -64,7 +64,7 @@ const RegisterPage = () => {
 						<input
 							type="text"
 							name="name"
-							placeholder="Enter full name..."
+							placeholder="User Name..."
 							required
 							onChange={(e) => {
 								setName(e.target.value);
@@ -77,7 +77,7 @@ const RegisterPage = () => {
 						<input
 							type="email"
 							name="email"
-							placeholder="Enter email address..."
+							placeholder="Email address..."
 							required
 							onChange={(e) => {
 								setEmail(e.target.value);
@@ -90,7 +90,7 @@ const RegisterPage = () => {
 						<input
 							type="password"
 							name="password"
-							placeholder="Enter password..."
+							placeholder="Password..."
 							required
 							onChange={(e) => {
 								setPassword(e.target.value);
@@ -103,7 +103,7 @@ const RegisterPage = () => {
 						<input
 							type="password"
 							name="repeatPassword"
-							placeholder="Enter the password again..."
+							placeholder="Repeat Password..."
 							required
 							onChange={(e) => {
 								setRepeatPassword(e.target.value);
@@ -135,7 +135,7 @@ const RegisterPage = () => {
 					</div>
 				</form>
 			</div>
-			<div className="sm:w-1/2 xl:w-2/3 h-full bg-[url('/images/register-thumbnail.webp')] bg-cover bg-center order-1"></div>
+			<div className="sm:w-1/2 xl:w-2/3 min-h-full bg-[url('/images/register-thumbnail.webp')] bg-cover bg-center order-1"></div>
 		</section>
 	);
 };
