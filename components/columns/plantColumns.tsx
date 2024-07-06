@@ -33,7 +33,7 @@ export const columns: ColumnDef<Plant>[] = [
 						<DropdownMenuItem
 							onClick={() =>
 								navigator.clipboard.writeText(
-									plant.id.toString()
+									plant._id.toString()
 								)
 							}
 						>

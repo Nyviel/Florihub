@@ -45,10 +45,10 @@ export const authOptions = {
 		},
 
 		async session({ session, token }) {
-			session.id = token.id;
-			session.email = token.email;
-			session.name = token.name;
-			session.isAdmin = token.isAdmin;
+			session.user.id = token.id;
+			session.user.email = token.email;
+			session.user.name = token.name;
+			session.user.isAdmin = token.isAdmin;
 			return session;
 		},
 	},

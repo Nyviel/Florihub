@@ -11,8 +11,9 @@ const Navigation = () => {
 
 	useEffect(() => {
 		if (session && session.user) {
+			console.log(session);
 			setIsAuthenticated(true);
-			if (session.isAdmin) {
+			if (session.user.isAdmin) {
 				setIsAdmin(true);
 			}
 		}
