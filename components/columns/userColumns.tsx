@@ -33,7 +33,7 @@ export const columns: ColumnDef<User>[] = [
 						<DropdownMenuItem
 							onClick={() =>
 								navigator.clipboard.writeText(
-									user.id.toString()
+									user._id.toString()
 								)
 							}
 						>
@@ -53,7 +53,7 @@ export const columns: ColumnDef<User>[] = [
 		},
 	},
 	{
-		accessorKey: "id",
+		accessorKey: "_id",
 		header: "Id",
 	},
 	{

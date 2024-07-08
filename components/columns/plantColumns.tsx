@@ -56,7 +56,7 @@ export const columns: ColumnDef<Plant>[] = [
 		},
 	},
 	{
-		accessorKey: "id",
+		accessorKey: "_id",
 		header: "Id",
 	},
 	{
