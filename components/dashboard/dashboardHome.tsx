@@ -1,4 +1,7 @@
 import DashboardStats from "@/components/dashboard/dashboardStats";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import {
 	Bar,
 	BarChart,
@@ -9,6 +12,14 @@ import {
 } from "recharts";
 
 const DashboardHome = () => {
+	const { data: session } = useSession();
+	const router = useRouter();
+	// useEffect(() => {
+	// 	if (!session || !session.user || !session.user.isAdmin) {
+	// 		router.replace("/");
+	// 	}
+	// }, [session]);
+
 	const data = [
 		{
 			month: "January",
@@ -60,7 +71,7 @@ const DashboardHome = () => {
 		},
 	];
 	return (
-		<div className="w-full h-full flex flex-col bg-green-900">
+		<div className="w-full h-screen flex flex-col bg-green-900">
 			<DashboardStats />
 			<hr className="mx-10"></hr>
 			<div className="flex-1 h-full flex flex-col justify-start items-center mt-5">
