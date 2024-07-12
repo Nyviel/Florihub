@@ -42,7 +42,7 @@ const LoginPage = () => {
 					onSubmit={(e) => {
 						handleFormSubmit(e);
 					}}
-					className="mx-6 p-6 h-fit space-y-8 bg-green-700 rounded-lg shadow shadow-green-950"
+					className="mt-12 mx-6 p-6 h-fit space-y-8 bg-green-700 rounded-lg shadow shadow-green-950"
 				>
 					<h2 className="text-3xl text-center font-semibold mb-6 text-white">
 						Login

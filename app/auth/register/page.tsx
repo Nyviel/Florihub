@@ -51,7 +51,7 @@ const RegisterPage = () => {
 					onSubmit={(e) => {
 						handleFormSubmit(e);
 					}}
-					className="p-8 m-4 rounded-lg bg-green-700 min-h-3/4 h-fit  text-center shadow shadow-green-950"
+					className="p-8 mt-12 m-6 rounded-lg bg-green-700 min-h-3/4 h-fit  text-center shadow shadow-green-950"
 				>
 					<h2 className="text-3xl text-center font-semibold mb-6 text-white">
 						Create An Account
