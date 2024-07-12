@@ -2,19 +2,20 @@
 import { ClipLoader } from "react-spinners";
 const override = {
 	display: "block",
-	margin: "100px auto",
+	position: "absolute",
+	top: "50%",
+	left: "50%",
+	translate: "-50% -50%",
 };
 const Spinner = ({ loading }: { loading: boolean }) => {
 	return (
-		<div className="min-h-full">
-			<ClipLoader
-				color="#3b82f6"
-				loading={loading}
-				cssOverride={override}
-				size={150}
-				aria-label="Loading spinner"
-			/>
-		</div>
+		<ClipLoader
+			color="#39ff14"
+			loading={loading}
+			cssOverride={override}
+			size={150}
+			aria-label="Loading spinner"
+		/>
 	);
 };
 
