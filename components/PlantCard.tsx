@@ -1,6 +1,12 @@
+"use client";
 import { Plant } from "@/interfaces/plant";
+import { useRouter } from "next/navigation";
 
 const PlantCard = ({ plant }: { plant: Plant }) => {
+	const router = useRouter();
+	const handleButtonClick = () => {
+		router.push(`/details?plant=${plant.name}`);
+	};
 	return (
 		<div className="w-full h-fit max-h-full bg-gray-900 rounded-lg space-y-4 border border-gray-950 shadow-md shadow-black">
 			<div className="w-full h-2/5">
@@ -24,7 +30,10 @@ const PlantCard = ({ plant }: { plant: Plant }) => {
 				))}
 			</div>
 			<div className="text-center p-6">
-				<button className="px-8 py-4 text-lg bg-green-700 rounded-lg">
+				<button
+					className="px-8 py-4 text-lg bg-green-700 rounded-lg"
+					onClick={handleButtonClick}
+				>
 					Details
 				</button>
 			</div>
