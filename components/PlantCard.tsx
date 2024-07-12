@@ -18,8 +18,8 @@ const PlantCard = ({ plant }: { plant: Plant }) => {
 			</div>
 			<div className="w-full flex flex-col justify-center items-center">
 				<h1 className="text-2xl">{plant.name}</h1>
-				<p className="text-lg text-gray-300 p-2">
-					{plant.description.substring(0, 50)}...
+				<p className="text-lg text-gray-300 p-2 px-4 text-center">
+					{plant.description.substring(0, 100)}...
 				</p>
 			</div>
 			<div className="text-gray-100 flex justify-center gap-2 flex-wrap px-6">
