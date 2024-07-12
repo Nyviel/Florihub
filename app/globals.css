@@ -80,3 +80,40 @@ body {
 	height: 100%;
 	width: 100%;
 }
+
+.Collapsible {
+	width: 100%;
+}
+
+.Collapsible__contentInner {
+	border: 1px solid rgb(22 101 52);
+}
+
+.Collapsible__trigger {
+	display: block;
+	position: relative;
+	padding: 10px;
+	padding-right: 30px;
+	background: rgb(22 101 52);
+	color: white;
+
+	&:after {
+		content: "\02C5";
+		position: absolute;
+		right: 10px;
+		top: 10px;
+		display: block;
+		transition: transform 300ms;
+	}
+
+	&.is-open {
+		&:after {
+			transform: rotateZ(180deg);
+		}
+	}
+
+	&.is-disabled {
+		opacity: 0.5;
+		background-color: grey;
+	}
+}
