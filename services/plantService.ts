@@ -30,3 +30,14 @@ export const fetchPlants = async (
 		return response.json();
 	});
 };
+
+export const fetchPlantByName = async (
+	plantName: string
+): Promise<Plant | null> => {
+	const res = await fetch(`${api}/plants/name?q=${plantName}`);
+	if (res.ok) {
+		return res.json();
+	} else {
+		return null;
+	}
+};
