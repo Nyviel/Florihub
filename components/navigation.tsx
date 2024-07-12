@@ -20,7 +20,7 @@ const Navigation = () => {
 	}, [session]);
 
 	return (
-		<header>
+		<header className="absolute w-full">
 			<div className="w-full flex items-center bg-green-950 p-5">
 				<a href="/" className="text-3xl">
 					<span className="text-green-400">Flori</span>
