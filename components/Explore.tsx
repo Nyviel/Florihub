@@ -40,8 +40,8 @@ const Explore = () => {
 	};
 
 	return (
-		<section className="w-full min-h-full bg-green-900 flex flex-col justify-start items-center text-white">
-			<h1 className="text-3xl font-semibold py-10 font-poppins">
+		<section className="w-full min-h-full flex flex-col justify-start items-center text-white bg-green-900 p-10">
+			<h1 className="text-3xl font-semibold mt-20 font-poppins">
 				Explore
 			</h1>
 			<form
