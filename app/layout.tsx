@@ -22,9 +22,11 @@ export default function RootLayout({
 	return (
 		<AuthProvider>
 			<html lang="en" suppressHydrationWarning={true}>
-				<body className={`${inter.className} antialiased`}>
+				<body
+					className={`${inter.className} antialiased flex flex-col`}
+				>
 					<Navigation />
-					<main className="min-h-full w-full bg-green-900">
+					<main className="flex-1 w-full bg-green-900">
 						{children}
 					</main>
 					<Footer />
