@@ -29,7 +29,7 @@ export default function RootLayout({
 					<main className="flex-1 w-full bg-green-900">
 						{children}
 					</main>
-					<Footer />
+					{/* <Footer /> */}
 					<ToastContainer
 						position="bottom-right"
 						autoClose={5000}
