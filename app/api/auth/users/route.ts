@@ -9,7 +9,6 @@ export const GET = async (request: Request) => {
 	try {
 		await connectDB();
 		const session = await getServerSession(authOptions);
-		console.log(session);
 		if (!session || !session.user.id || !session?.user.isAdmin) {
 			return new Response("Unauthorized", { status: 401 });
 		}
