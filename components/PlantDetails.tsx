@@ -3,15 +3,25 @@
 import { Plant } from "@/interfaces/plant";
 import { Construction, Flower2, Sprout } from "lucide-react";
 import Image from "next/image";
-import {
-	FaArrowDown,
-	FaBiohazard,
-	FaChevronDown,
-	FaSun,
-	FaWater,
-} from "react-icons/fa";
+import { FaBiohazard, FaSun, FaWater } from "react-icons/fa";
 import Collapsible from "react-collapsible";
-import { isArray } from "util";
+import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+
+const markdown = `A paragraph with *emphasis* and **strong importance**.
+
+> A block quote with ~strikethrough~ and a URL: https://reactjs.org.
+
+* Lists
+* [ ] todo
+* [x] done
+
+A table:
+
+| a | b |
+| - | - |
+`;
+
 const PlantDetails = ({ plant }: { plant: Plant | undefined }) => {
 	const excludeRows = ["_id", "description", "thumbnail", "images"];
 	return (
@@ -107,6 +117,7 @@ const PlantDetails = ({ plant }: { plant: Plant | undefined }) => {
 			<div className="w-full py-10">
 				<h3 className="text-2xl font-semibold">Description</h3>
 				<p className="py-2">{plant?.description}</p>
+				<Markdown remarkPlugins={[remarkGfm]}>{markdown}</Markdown>
 			</div>
 		</section>
 	);
