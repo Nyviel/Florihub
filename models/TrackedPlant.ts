@@ -1,30 +1,41 @@
-import { Schema, model, models } from "mongoose";
+import { Document, Model, Schema, model, models } from "mongoose";
 
 type TimelineEntryEvent = "water" | "image" | null;
 
-class TimelineEntry {
+export class TimelineEntry {
 	date: Number;
 	value: String;
 	event: TimelineEntryEvent;
 
 	constructor() {
 		this.date = Date.now();
-		this.value = "";
+		this.value = "Started tracking";
 		this.event = null;
 	}
 }
 
-const TrackedPlantSchema = new Schema(
+export interface ITrackedPlant extends Document {
+	plantId: Schema.Types.ObjectId;
+	userId: Schema.Types.ObjectId;
+	name: String;
+	timeline: TimelineEntry[];
+	images: String[];
+	thumbnail: String;
+}
+
+const TrackedPlantSchema = new Schema<ITrackedPlant>(
 	{
+		plantId: {
+			type: Schema.Types.ObjectId,
+		},
 		userId: {
 			type: Schema.Types.ObjectId,
-			required: true,
 		},
 		name: {
 			type: String,
 			required: true,
 		},
-		timeline: [{ type: TimelineEntry }],
+		timeline: [{ type: Schema.Types.Mixed }],
 		images: [
 			{
 				type: String,
@@ -40,6 +51,8 @@ const TrackedPlantSchema = new Schema(
 	}
 );
 
-const TrackedPlant =
-	models.TrackedPlant || model("TrackedPlant", TrackedPlantSchema);
+const TrackedPlant: Model<ITrackedPlant> =
+	models.TrackedPlant ||
+	model<ITrackedPlant>("TrackedPlant", TrackedPlantSchema);
+
 export default TrackedPlant;

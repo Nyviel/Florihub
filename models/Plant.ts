@@ -1,6 +1,25 @@
+import { Document, Model } from "mongoose";
 import { Schema, model, models } from "mongoose";
 
-const PlantSchema = new Schema(
+export interface IPlant extends Document {
+	name: string;
+	type: string;
+	family: string;
+	description: string;
+	images: string[];
+	tags: string[];
+	light: string[];
+	soil: string[];
+	water: string;
+	maintenance: string;
+	toxicity: string;
+	height: number;
+	width: number;
+	bloom: string[];
+	thumbnail: string;
+}
+
+const PlantSchema = new Schema<IPlant>(
 	{
 		name: {
 			type: String,
@@ -72,5 +91,6 @@ const PlantSchema = new Schema(
 	}
 );
 
-const Plant = models.Plant || model("Plant", PlantSchema);
+const Plant: Model<IPlant> =
+	models.Plant || model<IPlant>("Plant", PlantSchema);
 export default Plant;
