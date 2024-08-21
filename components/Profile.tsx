@@ -1,12 +1,42 @@
 "use client";
 
+import { TrackedPlant } from "@/interfaces/trackedPlant";
+import { fetchTrackedPlantsUID } from "@/services/trackedPlantsService";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
+import { toast } from "react-toastify";
+import Spinner from "./Spinner";
+import TrackedPlantCards from "./TrackedPlantsCards";
 
 const Profile = () => {
 	const { data: session } = useSession();
+	const [loading, setLoading] = useState(true);
+	const [trackedPlants, setTrackedPlants] = useState<TrackedPlant[]>([]);
+	const [page, setPage] = useState(1);
+	const [pageSize, setPageSize] = useState(9);
+	const [total, setTotal] = useState(0);
 
+	useEffect(() => {
+		const fetchUserTrackedPlants = async () => {
+			if (!session) return;
+			try {
+				const res = await fetchTrackedPlantsUID(
+					page,
+					pageSize,
+					session.user.id
+				);
+				setTrackedPlants(res.trackedPlants);
+				setTotal(res.total);
+			} catch (error) {
+				toast.error("Failed to fetch tracked plants");
+			} finally {
+				setLoading(false);
+			}
+		};
+		fetchUserTrackedPlants();
+	}, [session]);
 	return (
 		<section>
 			<div className="bg-gray-900">
@@ -20,27 +50,29 @@ const Profile = () => {
 					<h1 className="text-3xl font-bold mx-10 my-10 text-white text-center">
 						Your Profile
 					</h1>
-					<div className="w-full flex flex-col items-center justify-center">
-						{/* <Image
-							src={ProfileDefault}
-							alt="User"
-							height={0}
-							width={0}
-							sizes={"100vw"}
-							className="w-48 h-48 rounded-full"
-						></Image> */}
-						<h2 className="text-xl mt-6 mb-4 text-white">
+					<div className="w-full flex flex-col md:flex-row gap-10 items-center justify-center">
+						<p className="text-xl text-white w-fit">
 							<span className="font-bold block text-white">
 								Name
 							</span>{" "}
 							{session ? session.user?.name : ""}
-						</h2>
-						<h2 className="text-xl mb-4 text-white">
+						</p>
+						<p className="text-xl  text-white w-fit">
 							<span className="font-bold block text-white">
 								Email
 							</span>{" "}
 							{session ? session.user?.email : ""}
-						</h2>
+						</p>
+						<p className="text-xl  text-white w-fit">
+							<span className="font-bold block text-white">
+								Created
+							</span>{" "}
+							{session
+								? new Date(
+										session.user?.createdAt
+								  ).toLocaleDateString()
+								: ""}
+						</p>
 					</div>
 				</div>
 			</div>
@@ -51,38 +83,28 @@ const Profile = () => {
 							<h2 className="text-2xl font-semibold mb-4 text-white">
 								Your tracked plants
 							</h2>
-							{/* {!properties.length && loading && (
+							{!trackedPlants.length && loading && (
 								<Spinner loading={loading} />
 							)}
-							{!properties.length && !loading ? (
+							{!trackedPlants.length && !loading ? (
 								<div>
-									<p className="font-base text-lg mb-5">
-										There are no properties added yet.
-										<br /> Add your first property by
+									<p className="font-base text-lg mb-5 text-white">
+										There are no plants being tracked yet.
+										<br /> Track your first plant by
 										clicking the button below.
 									</p>
 									<Link
-										href="/properties/add"
-										className="bg-primary-500 hover:bg-primary-600 text-primary-950 font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
+										href="/explore"
+										className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
 									>
-										Add Property!
+										Explore!
 									</Link>
 								</div>
 							) : (
-								<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-									{properties.map((property, index) => {
-										return (
-											<ProfileListing
-												property={property}
-												deleteHandler={
-													handleDeleteProperty
-												}
-												key={index}
-											/>
-										);
-									})}
+								<div className="w-full">
+									<TrackedPlantCards plants={trackedPlants} />
 								</div>
-							)} */}
+							)}
 						</div>
 					</div>
 				</div>

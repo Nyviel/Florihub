@@ -6,13 +6,16 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 const ProfilePage = () => {
-	const { data: session } = useSession();
+	const { data: session, status } = useSession();
 	const router = useRouter();
 	useEffect(() => {
+		if (status === "loading") {
+			return;
+		}
 		if (!session || !session?.user) {
 			router.replace("/");
 		}
-	}, [session]);
+	}, [session, status]);
 	return <Profile />;
 };
 export default ProfilePage;
