@@ -26,6 +26,7 @@ export const authOptions = {
 						email: user.email,
 						name: user.name,
 						isAdmin: user.isAdmin,
+						createdAt: user.createdAt,
 					};
 				} else {
 					return null;
@@ -40,6 +41,7 @@ export const authOptions = {
 				token.email = user.email;
 				token.isAdmin = user.isAdmin;
 				token.name = user.name;
+				token.createdAt = user.createdAt;
 			}
 			return token;
 		},
@@ -49,6 +51,7 @@ export const authOptions = {
 			session.user.email = token.email;
 			session.user.name = token.name;
 			session.user.isAdmin = token.isAdmin;
+			session.user.createdAt = token.createdAt;
 			return session;
 		},
 	},
