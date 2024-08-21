@@ -25,6 +25,7 @@ import {
 } from "@/components/ui/select";
 import { Label } from "./ui/label";
 import { Input } from "@/components/ui/input";
+import { Button } from "./ui/button";
 const TIMELINE_EVENT_OPTIONS = ["water", "image"];
 
 const TrackedPlantDetails = ({
@@ -35,10 +36,12 @@ const TrackedPlantDetails = ({
 	const [plantTracked, setPlantTracked] = useState(false);
 	const [selectedEvent, setSelectedEvent] = useState("");
 	const [selectedImage, setSelectedImage] = useState<File>();
+	const [previewUrl, setPreviewUrl] = useState<string | null | undefined>(
+		null
+	);
 	const { data: session } = useSession();
 
 	useEffect(() => {
-		console.log(plant);
 		const checkPlantTracking = async () => {
 			try {
 				if (!plant || !plant._id || !session || !session.user) return;
@@ -58,6 +61,20 @@ const TrackedPlantDetails = ({
 		};
 		checkPlantTracking();
 	}, [session, plant]);
+
+	useEffect(() => {
+		if (!selectedImage) {
+			return;
+		}
+
+		const reader = new FileReader();
+
+		reader.onloadend = () => {
+			setPreviewUrl(reader.result?.toString());
+		};
+
+		reader.readAsDataURL(selectedImage);
+	}, [selectedImage]);
 
 	const removeTrackedPlant = async () => {
 		if (!plant?._id || !session?.user.id) return;
@@ -84,11 +101,22 @@ const TrackedPlantDetails = ({
 		if (e.target.files) {
 			setSelectedImage(e.target.files[0]);
 			console.log("image: ", selectedImage, e.target.files);
+			setTimeout(() => {
+				console.log("image: ", selectedImage, e.target.files);
+			}, 1000);
+		}
+	};
+
+	const clearState = (isOpen: boolean) => {
+		if (!isOpen) {
+			setSelectedEvent("");
+			setSelectedImage(undefined);
+			setPreviewUrl("");
 		}
 	};
 
 	return (
-		<section className="container mx-auto max-h-fit min-h-screen bg-gray-900 text-white">
+		<section className="container mx-auto max-h-fit min-h-screen  text-white">
 			<div className="w-full py-32 ml-2">
 				<h1 className="text-3xl font-semibold text-center ">
 					Timeline of your {plant?.name}
@@ -105,12 +133,9 @@ const TrackedPlantDetails = ({
 					)}
 				</div>
 				<ul className="timeline | text-white space-y-10">
-					{plant?.timeline.map((timelineEntry) => {
+					{plant?.timeline.map((timelineEntry, index) => {
 						return (
-							<li
-								key={timelineEntry.date}
-								className="timeline-entry"
-							>
+							<li key={index} className="timeline-entry">
 								<div className="flex gap-3 items-center">
 									<p>
 										{new Date(
@@ -122,8 +147,8 @@ const TrackedPlantDetails = ({
 							</li>
 						);
 					})}
-					<li key={plant?._id} className="timeline-entry">
-						<Dialog>
+					<li className="timeline-entry">
+						<Dialog onOpenChange={clearState}>
 							<DialogTrigger className="bg-green-700 py-3 px-6 rounded-lg">
 								Add new event
 							</DialogTrigger>
@@ -137,17 +162,22 @@ const TrackedPlantDetails = ({
 								</DialogHeader>
 								<hr />
 								<form>
-									<Label htmlFor="select">
-										Type of event to add
-									</Label>
+									<div className="pb-2">
+										<Label htmlFor="select">
+											Type of event to add
+										</Label>
+									</div>
 									<Select onValueChange={handleEventChange}>
 										<SelectTrigger className="w-[180px]">
 											<SelectValue placeholder="Event" />
 										</SelectTrigger>
 										<SelectContent>
 											{TIMELINE_EVENT_OPTIONS.map(
-												(option) => (
-													<SelectItem value={option}>
+												(option, index) => (
+													<SelectItem
+														key={index}
+														value={option}
+													>
 														{option}
 													</SelectItem>
 												)
@@ -164,8 +194,18 @@ const TrackedPlantDetails = ({
 												type="file"
 												onChange={handleFileChange}
 											/>
+											{previewUrl && (
+												<img
+													className="w-[200px] h-[200px] pt-3"
+													src={previewUrl}
+													alt="Preview"
+												/>
+											)}
 										</div>
 									)}
+									<div className="py-3">
+										<Button type="button">Submit</Button>
+									</div>
 								</form>
 							</DialogContent>
 						</Dialog>
