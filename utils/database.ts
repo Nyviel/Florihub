@@ -4,6 +4,7 @@ let connected = false;
 
 const connectDB = async () => {
 	mongoose.set("strictQuery", true);
+	mongoose.set("sanitizeFilter", true);
 
 	if (connected) {
 		console.error("DB: MONGODB IS ALREADY CONNECTED");
