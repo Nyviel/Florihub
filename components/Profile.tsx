@@ -40,14 +40,14 @@ const Profile = () => {
 	return (
 		<section>
 			<div className="bg-gray-900">
-				<div className="container mx-auto min-h-48 text-center py-5">
+				<div className="container mx-auto min-h-48 text-center py-24">
 					<Link
 						href="/"
 						className="flex items-center text-white hover:underline py-3"
 					>
 						<FaArrowLeft className="mr-2" /> Return to Home
 					</Link>
-					<h1 className="text-3xl font-bold mx-10 my-10 text-white text-center">
+					<h1 className="text-3xl font-bold mx-10 mb-10 text-white text-center">
 						Your Profile
 					</h1>
 					<div className="w-full flex flex-col md:flex-row gap-10 items-center justify-center">

@@ -11,7 +11,6 @@ const Navigation = () => {
 
 	useEffect(() => {
 		if (session && session.user) {
-			console.log(session);
 			setIsAuthenticated(true);
 			if (session.user.isAdmin) {
 				setIsAdmin(true);
@@ -21,7 +20,7 @@ const Navigation = () => {
 
 	return (
 		<header className="absolute w-full">
-			<div className="w-full flex items-center bg-green-950 p-5">
+			<div className="w-full flex items-center bg-gray-950 p-5">
 				<a href="/" className="text-3xl">
 					<span className="text-green-400">Flori</span>
 					<span className="text-white font-bold">Hub</span>
