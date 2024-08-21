@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import "photoswipe/dist/photoswipe.css";
 import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
 import AuthProvider from "@/components/AuthProvider";
 import { Bounce, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -22,14 +22,9 @@ export default function RootLayout({
 	return (
 		<AuthProvider>
 			<html lang="en" suppressHydrationWarning={true}>
-				<body
-					className={`${inter.className} antialiased flex flex-col`}
-				>
+				<body className={`${inter.className} antialiased bg-green-900`}>
 					<Navigation />
-					<main className="flex-1 w-full bg-green-900">
-						{children}
-					</main>
-					{/* <Footer /> */}
+					<main>{children}</main>
 					<ToastContainer
 						position="bottom-right"
 						autoClose={5000}
