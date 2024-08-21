@@ -76,7 +76,7 @@ const PlantDetails = ({ plant }: { plant: Plant | undefined }) => {
 
 	return (
 		<Gallery>
-			<section className="container mx-auto h-fit bg-gray-900 text-white">
+			<section className="container mx-auto h-fit text-white">
 				<div className="w-full">
 					<h1 className="flex-1 text-center text-2xl lg:text-4xl pt-24 font-semibold">
 						{plant?.name}

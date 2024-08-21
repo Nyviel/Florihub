@@ -56,7 +56,7 @@ const Explore = () => {
 	};
 
 	return (
-		<section className="md:container min-h-full flex flex-col justify-start items-center text-white bg-green-900 p-2 md:py-10">
+		<section className="md:container min-h-full flex flex-col justify-start items-center text-white p-2 md:py-10">
 			<h1 className="text-3xl font-semibold mt-20 font-poppins">
 				Explore
 			</h1>

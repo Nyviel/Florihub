@@ -22,7 +22,7 @@ export default function RootLayout({
 	return (
 		<AuthProvider>
 			<html lang="en" suppressHydrationWarning={true}>
-				<body className={`${inter.className} antialiased bg-green-900`}>
+				<body className={`${inter.className} antialiased bg-green-950`}>
 					<Navigation />
 					<main>{children}</main>
 					<ToastContainer
