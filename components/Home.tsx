@@ -81,7 +81,7 @@ const Home = () => {
 	};
 
 	return (
-		<section className="flex flex-col md:flex-row h-full">
+		<section className="flex flex-col md:flex-row h-screen">
 			<div className="w-full h-full flex flex-col items-center justify-center text-white bg-green-800">
 				<h1 className="text-xl md:text-2xl lg:text-3xl lg:leading-10">
 					Welcome to <span className="text-green-500">Flori</span>Hub
