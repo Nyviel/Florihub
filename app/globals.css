@@ -117,3 +117,38 @@ body {
 		background-color: grey;
 	}
 }
+
+.timeline {
+	position: relative;
+	padding-left: 30px; /* Space for the vertical line */
+	list-style: none; /* Remove default list styling */
+}
+
+.timeline::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 10px; /* Position the vertical line */
+	width: 2px; /* Line width */
+	height: 100%; /* Full height of the ul */
+	background-color: white; /* Line color */
+}
+
+.timeline .timeline-entry {
+	--vertical-padding: 32px;
+	--horizontal-padding: 16px;
+	position: relative;
+	padding: var(--vertical-padding) var(--horizontal-padding);
+}
+
+.timeline .timeline-entry::before {
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: -24.25px; /* Position the dot on the line */
+	transform: translateY(-50%);
+	width: 12px; /* Dot size */
+	aspect-ratio: 1;
+	background-color: white; /* Dot color */
+	border-radius: 50%; /* Make the dot a circle */
+}
