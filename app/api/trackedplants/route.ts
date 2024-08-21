@@ -4,7 +4,8 @@ import { authOptions } from "@/utils/authOptions";
 import connectDB from "@/utils/database";
 import { getServerSession } from "next-auth";
 import { NextRequest } from "next/server";
-
+import mongoose from "mongoose";
+const { ObjectId } = mongoose.Types;
 // GET: /api/trackedplants
 export const GET = async (request: NextRequest) => {
 	try {
@@ -20,6 +21,11 @@ export const GET = async (request: NextRequest) => {
 			Number(request.nextUrl.searchParams.get("page")) || 1;
 		const pageSize: number =
 			Number(request.nextUrl.searchParams.get("pageSize")) || 9;
+		const uid: string = request.nextUrl.searchParams.get("uid") || "";
+
+		if (uid !== session.user.id) {
+			return new Response("Unauthorized", { status: 403 });
+		}
 
 		const skip: number = (page - 1) * pageSize;
 		const total = await TrackedPlant.countDocuments();
@@ -49,14 +55,13 @@ export const POST = async (request: NextRequest) => {
 
 		const body = await request.json();
 		const { plantId, userId } = body;
-		console.log(userId, session.user.id);
-		if (userId !== session.user.id) {
+		if (userId.toString() !== session.user.id) {
 			return new Response("Unauthorized", { status: 403 });
 		}
 
 		const plant = await Plant.findOne({ _id: plantId });
 		if (!plant) {
-			return new Response("Plant not found", { status: 500 });
+			return new Response("Plant not found", { status: 404 });
 		}
 		const { name, images, thumbnail } = plant;
 		const newTrackedPlant = await TrackedPlant.create({
@@ -73,39 +78,6 @@ export const POST = async (request: NextRequest) => {
 			});
 		} else {
 			return new Response("Failed to add TrackedPlant", { status: 500 });
-		}
-	} catch (error) {
-		console.error("API:(/api/trackedplants) ENCOUNTERED ERROR: ", error);
-		return new Response("Unexpected server error", { status: 500 });
-	}
-};
-
-export const DELETE = async (request: NextRequest) => {
-	try {
-		await connectDB();
-		const session = await getServerSession(authOptions);
-		if (!session || !session.user) {
-			return new Response("Unauthorized", { status: 401 });
-		}
-
-		const plantId = request.nextUrl.searchParams.get("pid");
-		const userId = request.nextUrl.searchParams.get("uid");
-
-		if (userId !== session.user.id) {
-			return new Response("Unauthorized", { status: 403 });
-		}
-
-		const plant = await Plant.findOne({ _id: plantId });
-		if (!plant) {
-			return new Response("Plant not found", { status: 500 });
-		}
-		const deletedStatus = await TrackedPlant.deleteOne({ plantId, userId });
-		if (deletedStatus) {
-			return new Response("Deleted entry sucessfully", {
-				status: 200,
-			});
-		} else {
-			return new Response("Failed to delete entry", { status: 500 });
 		}
 	} catch (error) {
 		console.error("API:(/api/trackedplants) ENCOUNTERED ERROR: ", error);
