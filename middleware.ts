@@ -3,7 +3,6 @@ import { withAuth } from "next-auth/middleware";
 export default withAuth(function middleware(_) {}, {
 	callbacks: {
 		authorized: ({ token, req }) => {
-			console.log("URL:", req.nextUrl);
 			if (req.nextUrl.pathname === "/dashboard") {
 				return token?.isAdmin === true;
 			}
@@ -13,4 +12,4 @@ export default withAuth(function middleware(_) {}, {
 	},
 });
 
-export const config = { matcher: ["/dashboard", "/profile"] };
+export const config = { matcher: ["/dashboard", "/profile", "/trackedplants"] };
