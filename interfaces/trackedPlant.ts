@@ -7,6 +7,7 @@ export interface TimelineEntry {
 }
 
 export interface TrackedPlant {
+	_id: string;
 	plantId: string;
 	userId: string;
 	name: string;

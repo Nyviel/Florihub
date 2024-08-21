@@ -1,6 +1,6 @@
-import { Document, Model, Schema, model, models } from "mongoose";
-
-type TimelineEntryEvent = "water" | "image" | null;
+import mongoose, { Document, Model, Schema, model, models } from "mongoose";
+const { ObjectId } = mongoose.Types;
+export type TimelineEntryEvent = "water" | "image" | null;
 
 export class TimelineEntry {
 	date: Number;
