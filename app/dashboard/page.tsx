@@ -22,7 +22,7 @@ const DashboardPage = () => {
 
 	return (
 		<div className="h-full w-full flex text-white">
-			<div className="w-1/6 p-5 bg-green-800 border-r border-white">
+			<div className="w-1/6 p-5 pt-24 bg-green-800 border-r border-white">
 				<ul className="flex flex-col gap-3 text-lg" role="list">
 					<li
 						className="w-fit hover:cursor-pointer"
@@ -52,7 +52,7 @@ const DashboardPage = () => {
 					</li>
 				</ul>
 			</div>
-			<div className="w-5/6 h-full">
+			<div className="w-5/6 pt-16 h-full">
 				{currentView == "dashboard" && <DashboardHome />}
 				{currentView == "users" && <DashboardUsers />}
 				{currentView == "plants" && <DashboardPlants />}

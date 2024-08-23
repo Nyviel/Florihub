@@ -13,8 +13,13 @@ const DashboardPlants = () => {
 		const populateData = async () => {
 			const res = await fetchPlants("");
 			if (res) {
-				console.log(res.plants);
-				setData(res.plants);
+				setData(
+					res.plants.map((plant) => ({
+						...plant,
+						description:
+							plant.description.substring(0, 200) + "...",
+					}))
+				);
 			} else {
 				toast.error("Failed fetching plants");
 			}
