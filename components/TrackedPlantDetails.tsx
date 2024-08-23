@@ -1,13 +1,14 @@
 "use client";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
 import {
 	deleteTrackedPlant,
 	isPlantTracked,
+	postTrackedPlantTimelineEvent,
 } from "@/services/trackedPlantsService";
 import { TrackedPlant } from "@/interfaces/trackedPlant";
-import { Minus } from "lucide-react";
+import { GlassWater, Minus } from "lucide-react";
 import {
 	Dialog,
 	DialogContent,
@@ -91,7 +92,35 @@ const TrackedPlantDetails = ({
 		}
 	};
 
-	const addNewEvent = async () => {};
+	const addNewEvent = async (e: FormEvent) => {
+		e.preventDefault();
+		console.log(selectedEvent, selectedImage);
+		if (!plant) return;
+
+		if (!TIMELINE_EVENT_OPTIONS.includes(selectedEvent)) {
+			toast.error("Incorrect event option selected!");
+			return;
+		}
+
+		if (selectedEvent === "water") {
+			try {
+				const res = await postTrackedPlantTimelineEvent(
+					plant._id,
+					selectedEvent,
+					selectedImage
+				);
+				if (res.ok) {
+					toast.success("Successfully added a timeline event!");
+				} else {
+					toast.error("Failed to add timeline event!");
+				}
+			} catch (error) {
+				toast.error("Failed to add timeline event!");
+				console.error(error);
+			}
+		} else if (selectedEvent === "image") {
+		}
+	};
 
 	const handleEventChange = (option: string) => {
 		setSelectedEvent(option);
@@ -142,7 +171,21 @@ const TrackedPlantDetails = ({
 											timelineEntry.date
 										).toLocaleDateString()}
 									</p>
-									-<p>{timelineEntry.value}</p>
+									-
+									<p>
+										{timelineEntry.event === "water" && (
+											<p>
+												Water{" "}
+												<GlassWater className="inline text-blue-500" />
+											</p>
+										)}
+										{timelineEntry.event === "image" && (
+											<p>Image func to be added</p>
+										)}
+										{timelineEntry.event === null && (
+											<p>Started tracking</p>
+										)}
+									</p>
 								</div>
 							</li>
 						);
@@ -161,7 +204,7 @@ const TrackedPlantDetails = ({
 									</DialogDescription>
 								</DialogHeader>
 								<hr />
-								<form>
+								<form onSubmit={addNewEvent}>
 									<div className="pb-2">
 										<Label htmlFor="select">
 											Type of event to add
@@ -204,7 +247,7 @@ const TrackedPlantDetails = ({
 										</div>
 									)}
 									<div className="py-3">
-										<Button type="button">Submit</Button>
+										<Button type="submit">Submit</Button>
 									</div>
 								</form>
 							</DialogContent>
