@@ -1,13 +1,16 @@
+import { randomUUID } from "crypto";
 import mongoose, { Document, Model, Schema, model, models } from "mongoose";
 const { ObjectId } = mongoose.Types;
 export type TimelineEntryEvent = "water" | "image" | null;
 
 export class TimelineEntry {
+	_id: String;
 	date: Number;
 	value: String;
 	event: TimelineEntryEvent;
 
 	constructor() {
+		this._id = randomUUID();
 		this.date = Date.now();
 		this.value = "Started tracking";
 		this.event = null;

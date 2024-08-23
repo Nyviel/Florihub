@@ -1,6 +1,7 @@
 type TimelineEntryEvent = "water" | "image" | null;
 
 export interface TimelineEntry {
+	_id: string;
 	date: number;
 	value: string;
 	event: TimelineEntryEvent;
