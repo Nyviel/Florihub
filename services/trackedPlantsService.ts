@@ -16,40 +16,28 @@ export const fetchTrackedPlantsUID = async (
 	pageSize: number = 9,
 	uid: string
 ): Promise<TrackedPlantPaginationType> => {
-	return fetch(
-		`${api}/trackedplants?page=${page}&pageSize=${pageSize}&uid=${uid}`
-	).then(async (response) => {
-		if (!response.ok) {
-			throw new Error(response.statusText);
-		}
-		return response.json();
-	});
+	return (
+		await fetch(
+			`${api}/trackedplants?page=${page}&pageSize=${pageSize}&uid=${uid}`
+		)
+	).json();
 };
 
 export const fetchTrackedPlantById = async (
 	tpid: string
 ): Promise<TrackedPlant | null> => {
-	return fetch(`${api}/trackedplants/${tpid}`).then((response) => {
-		if (!response.ok) {
-			throw new Error("Failed to fetch tracked plant");
-		} else {
-			return response.json();
-		}
-	});
+	return (await fetch(`${api}/trackedplants/${tpid}`)).json();
 };
 
 export const isPlantTracked = async (
 	plantId: string,
 	userId: string
 ): Promise<PlantTrackingResponse> => {
-	return fetch(
-		`${api}/trackedplants/istracked?pid=${plantId}&uid=${userId}`
-	).then(async (response) => {
-		if (!response.ok) {
-			throw new Error(response.statusText);
-		}
-		return response.json();
-	});
+	return (
+		await fetch(
+			`${api}/trackedplants/istracked?pid=${plantId}&uid=${userId}`
+		)
+	).json();
 };
 
 export const postTrackedPlant = async (
@@ -72,4 +60,27 @@ export const deleteTrackedPlant = async (
 	return fetch(`${api}/trackedplants/${plantId}?uid=${userId}`, {
 		method: "DELETE",
 	});
+};
+
+export const postTrackedPlantTimelineEvent = async (
+	trackedPlantId: string,
+	eventType: string,
+	image: File | undefined
+): Promise<Response> => {
+	return fetch(`${api}/trackedplants/timeline?tpid=${trackedPlantId}`, {
+		method: "POST",
+		body: JSON.stringify({ eventType, image }),
+	});
+};
+
+export const deleteTrackedPlantTimelineEvent = async (
+	eventId: string,
+	trackedPlantId: string
+): Promise<Response> => {
+	return fetch(
+		`${api}/trackedplants/timeline/${eventId}?tpid=${trackedPlantId}`,
+		{
+			method: "delete",
+		}
+	);
 };
