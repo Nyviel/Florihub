@@ -27,6 +27,8 @@ import {
 import { Label } from "./ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "./ui/button";
+import Image from "next/image";
+import { Gallery, Item } from "react-photoswipe-gallery";
 const TIMELINE_EVENT_OPTIONS = ["water", "image"];
 
 const TrackedPlantDetails = ({
@@ -102,23 +104,26 @@ const TrackedPlantDetails = ({
 			return;
 		}
 
-		if (selectedEvent === "water") {
-			try {
-				const res = await postTrackedPlantTimelineEvent(
-					plant._id,
-					selectedEvent,
-					selectedImage
-				);
-				if (res.ok) {
-					toast.success("Successfully added a timeline event!");
-				} else {
-					toast.error("Failed to add timeline event!");
-				}
-			} catch (error) {
+		const formData = new FormData();
+		formData.append("eventType", selectedEvent);
+
+		if (selectedImage && selectedEvent === "image") {
+			formData.append("image", selectedImage);
+		}
+
+		try {
+			const res = await postTrackedPlantTimelineEvent(
+				plant._id,
+				formData
+			);
+			if (res.ok) {
+				toast.success("Successfully added a timeline event!");
+			} else {
 				toast.error("Failed to add timeline event!");
-				console.error(error);
 			}
-		} else if (selectedEvent === "image") {
+		} catch (error) {
+			toast.error("Failed to add timeline event!");
+			console.error(error);
 		}
 	};
 
@@ -145,117 +150,146 @@ const TrackedPlantDetails = ({
 	};
 
 	return (
-		<section className="container mx-auto max-h-fit min-h-screen  text-white">
-			<div className="w-full py-32 ml-2">
-				<h1 className="text-3xl font-semibold text-center ">
-					Timeline of your {plant?.name}
-				</h1>
-				<div className="my-10">
-					{plantTracked && (
-						<button
-							onClick={removeTrackedPlant}
-							className="bg-orange-600 px-4 py-2 text-lg rounded-lg flex justify-center items-center"
-						>
-							Stop Tracking Plant{" "}
-							<Minus className="inline ml-1" />
-						</button>
-					)}
-				</div>
-				<ul className="timeline | text-white space-y-10">
-					{plant?.timeline.map((timelineEntry, index) => {
-						return (
-							<li key={index} className="timeline-entry">
-								<div className="flex gap-3 items-center">
-									<p>
-										{new Date(
-											timelineEntry.date
-										).toLocaleDateString()}
-									</p>
-									-
-									<p>
-										{timelineEntry.event === "water" && (
-											<p>
-												Water{" "}
-												<GlassWater className="inline text-blue-500" />
-											</p>
-										)}
-										{timelineEntry.event === "image" && (
-											<p>Image func to be added</p>
-										)}
-										{timelineEntry.event === null && (
-											<p>Started tracking</p>
-										)}
-									</p>
-								</div>
-							</li>
-						);
-					})}
-					<li className="timeline-entry">
-						<Dialog onOpenChange={clearState}>
-							<DialogTrigger className="bg-green-700 py-3 px-6 rounded-lg">
-								Add new event
-							</DialogTrigger>
-							<DialogContent>
-								<DialogHeader>
-									<DialogTitle>Adding new event</DialogTitle>
-									<DialogDescription>
-										This action adds a new event, fill the
-										form below with relevant information.
-									</DialogDescription>
-								</DialogHeader>
-								<hr />
-								<form onSubmit={addNewEvent}>
-									<div className="pb-2">
-										<Label htmlFor="select">
-											Type of event to add
-										</Label>
-									</div>
-									<Select onValueChange={handleEventChange}>
-										<SelectTrigger className="w-[180px]">
-											<SelectValue placeholder="Event" />
-										</SelectTrigger>
-										<SelectContent>
-											{TIMELINE_EVENT_OPTIONS.map(
-												(option, index) => (
-													<SelectItem
-														key={index}
-														value={option}
-													>
-														{option}
-													</SelectItem>
-												)
+		<Gallery>
+			<section className="container mx-auto max-h-fit min-h-screen  text-white">
+				<div className="w-full py-32 ml-2">
+					<h1 className="text-3xl font-semibold text-center ">
+						Timeline of your {plant?.name}
+					</h1>
+					<div className="my-10">
+						{plantTracked && (
+							<button
+								onClick={removeTrackedPlant}
+								className="bg-orange-600 px-4 py-2 text-lg rounded-lg flex justify-center items-center"
+							>
+								Stop Tracking Plant{" "}
+								<Minus className="inline ml-1" />
+							</button>
+						)}
+					</div>
+					<ul className="timeline | text-white space-y-10">
+						{plant?.timeline.map((timelineEntry, index) => {
+							return (
+								<li key={index} className="timeline-entry">
+									<div className="flex gap-3 items-center">
+										<p>
+											{new Date(
+												timelineEntry.date
+											).toLocaleDateString()}
+										</p>
+										-
+										<div>
+											{timelineEntry.event ===
+												"water" && (
+												<p>
+													Water{" "}
+													<GlassWater className="inline text-blue-500" />
+												</p>
 											)}
-										</SelectContent>
-									</Select>
-									{selectedEvent === "image" && (
-										<div className="grid w-full max-w-sm items-center gap-1.5 py-5">
-											<Label htmlFor="picture">
-												Picture
-											</Label>
-											<Input
-												id="picture"
-												type="file"
-												onChange={handleFileChange}
-											/>
-											{previewUrl && (
-												<img
-													className="w-[200px] h-[200px] pt-3"
-													src={previewUrl}
-													alt="Preview"
-												/>
+											{timelineEntry.event ===
+												"image" && (
+												<Item
+													original={`${timelineEntry.value}`}
+													thumbnail={`${timelineEntry.value}`}
+													width={640}
+													height={480}
+												>
+													{({ ref, open }) => (
+														<Image
+															ref={ref}
+															onClick={open}
+															src={`${timelineEntry.value}`}
+															alt="timeline image preview"
+															width={256}
+															height={144}
+															className="object-cover object-center rounded hover:cursor-pointer"
+															priority={true}
+														/>
+													)}
+												</Item>
+											)}
+											{timelineEntry.event === null && (
+												<p>Started tracking</p>
 											)}
 										</div>
-									)}
-									<div className="py-3">
-										<Button type="submit">Submit</Button>
 									</div>
-								</form>
-							</DialogContent>
-						</Dialog>
-					</li>
-				</ul>
-			</div>
-		</section>
+								</li>
+							);
+						})}
+						<li className="timeline-entry">
+							<Dialog onOpenChange={clearState}>
+								<DialogTrigger className="bg-green-700 py-3 px-6 rounded-lg">
+									Add new event
+								</DialogTrigger>
+								<DialogContent>
+									<DialogHeader>
+										<DialogTitle>
+											Adding new event
+										</DialogTitle>
+										<DialogDescription>
+											This action adds a new event, fill
+											the form below with relevant
+											information.
+										</DialogDescription>
+									</DialogHeader>
+									<hr />
+									<form onSubmit={addNewEvent}>
+										<div className="pb-2">
+											<Label htmlFor="select">
+												Type of event to add
+											</Label>
+										</div>
+										<Select
+											onValueChange={handleEventChange}
+										>
+											<SelectTrigger className="w-[180px]">
+												<SelectValue placeholder="Event" />
+											</SelectTrigger>
+											<SelectContent>
+												{TIMELINE_EVENT_OPTIONS.map(
+													(option, index) => (
+														<SelectItem
+															key={index}
+															value={option}
+														>
+															{option}
+														</SelectItem>
+													)
+												)}
+											</SelectContent>
+										</Select>
+										{selectedEvent === "image" && (
+											<div className="grid w-full max-w-sm items-center gap-1.5 py-5">
+												<Label htmlFor="picture">
+													Picture
+												</Label>
+												<Input
+													id="picture"
+													type="file"
+													onChange={handleFileChange}
+												/>
+												{previewUrl && (
+													<img
+														className="w-[200px] h-[200px] pt-3"
+														src={previewUrl}
+														alt="Preview"
+													/>
+												)}
+											</div>
+										)}
+										<div className="py-3">
+											<Button type="submit">
+												Submit
+											</Button>
+										</div>
+									</form>
+								</DialogContent>
+							</Dialog>
+						</li>
+					</ul>
+				</div>
+			</section>
+		</Gallery>
 	);
 };
 export default TrackedPlantDetails;

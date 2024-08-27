@@ -64,12 +64,11 @@ export const deleteTrackedPlant = async (
 
 export const postTrackedPlantTimelineEvent = async (
 	trackedPlantId: string,
-	eventType: string,
-	image: File | undefined
+	formData: FormData
 ): Promise<Response> => {
 	return fetch(`${api}/trackedplants/timeline?tpid=${trackedPlantId}`, {
 		method: "POST",
-		body: JSON.stringify({ eventType, image }),
+		body: formData,
 	});
 };
 
