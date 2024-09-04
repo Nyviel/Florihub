@@ -9,9 +9,19 @@ import "react-toastify/dist/ReactToastify.css";
 const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
 	title: "FloriHub",
-	description: "All about plants and their care",
+	description:
+		"All about plants and their care, track your favourite plants!",
 	authors: [{ name: "Przemysław Kaczmarski" }],
-	keywords: ["Flora", "plants", "plant care", "plant guides", "succulents"],
+	keywords: [
+		"FloriHub",
+		"Flora",
+		"plants",
+		"plant care",
+		"plant guides",
+		"succulents",
+		"plant tracking",
+		"plant timelines",
+	],
 };
 
 export default function RootLayout({
@@ -22,7 +32,7 @@ export default function RootLayout({
 	return (
 		<AuthProvider>
 			<html lang="en" suppressHydrationWarning={true}>
-				<body className={`${inter.className} antialiased bg-green-950`}>
+				<body className={`${inter.className} antialiased bg-green-800`}>
 					<Navigation />
 					<main>{children}</main>
 					<ToastContainer
