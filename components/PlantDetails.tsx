@@ -14,12 +14,14 @@ import {
 	postTrackedPlant,
 } from "@/services/trackedPlantsService";
 import { Gallery, Item } from "react-photoswipe-gallery";
+import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import "github-markdown-css/github-markdown.css";
 
 const PlantDetails = ({ plant }: { plant: Plant | undefined }) => {
 	const [plantTracked, setPlantTracked] = useState(false);
 	const { data: session } = useSession();
 	const excludeRows = ["_id", "description", "thumbnail", "images"];
-
 	useEffect(() => {
 		const checkPlantTracking = async () => {
 			try {
@@ -78,11 +80,11 @@ const PlantDetails = ({ plant }: { plant: Plant | undefined }) => {
 		<Gallery>
 			<section className="container mx-auto h-fit text-white">
 				<div className="w-full">
-					<h1 className="flex-1 text-center text-2xl lg:text-4xl pt-24 font-semibold">
+					<h1 className="flex-1 text-center text-2xl lg:text-4xl pt-32 pb-8 font-semibold">
 						{plant?.name}
 					</h1>
 				</div>
-				<div className="w-full flex flex-col sm:flex-row mt-10">
+				<div className="w-full flex flex-col sm:flex-row mt-10 shadow-md shadow-black">
 					{plant?.images.length === 1 ? (
 						<Item
 							original={`/images/${plant?.images[0]}`}
@@ -98,7 +100,7 @@ const PlantDetails = ({ plant }: { plant: Plant | undefined }) => {
 									alt="Plant Image"
 									height={600}
 									width={1000}
-									className="h-[600px] object-cover rounded-xl mx-auto"
+									className="h-[600px] object-cover rounded-tl-lg rounded-bl-lg mx-auto"
 									priority={true}
 								/>
 							)}
@@ -140,7 +142,7 @@ const PlantDetails = ({ plant }: { plant: Plant | undefined }) => {
 							})}
 						</div>
 					)}
-					<div className="w-full sm:w-1/4 sm:min-w-[300px]">
+					<div className="w-full sm:w-1/4 sm:min-w-[300px] bg-green-900 rounded-tr-lg rounded-br-lg flex justify-center items-center">
 						<ul
 							className="flex flex-row sm:flex-col flex-wrap items-center justify-center text-center gap-5 py-3 "
 							role="list"
@@ -232,10 +234,10 @@ const PlantDetails = ({ plant }: { plant: Plant | undefined }) => {
 									)
 									.map((entry, index) => (
 										<tr key={index}>
-											<td className="sm:px-4 py-1 border border-green-500">
+											<td className="sm:px-4 py-2 border-b border-r border-green-500">
 												{entry[0]}
 											</td>
-											<td className="sm:px-4 py-1 border border-green-500">
+											<td className="sm:px-4 py-2 border-b border-green-500">
 												{Array.isArray(entry[1])
 													? entry[1].map(
 															(e) => e + " "
@@ -249,9 +251,11 @@ const PlantDetails = ({ plant }: { plant: Plant | undefined }) => {
 					</Collapsible>
 				</div>
 				<div className="w-full py-10 ml-2">
-					<h3 className="text-2xl font-semibold">Description</h3>
-					<p className="py-2">{plant?.description}</p>
-					{/* <Markdown remarkPlugins={[remarkGfm]}>{markdown}</Markdown> */}
+					<div className="markdown-body | !bg-transparent">
+						<Markdown remarkPlugins={[remarkGfm]}>
+							{plant?.description}
+						</Markdown>
+					</div>
 				</div>
 			</section>
 		</Gallery>
