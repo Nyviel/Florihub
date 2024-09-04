@@ -37,7 +37,7 @@ const LoginPage = () => {
 	};
 	return (
 		<section className="min-h-screen w-full flex">
-			<div className="w-full md:w-1/2 lg:w-1/4 flex justify-center items-start pt-12 bg-green-900">
+			<div className="w-full md:w-1/2 lg:w-1/4 flex justify-center items-start pt-12 ">
 				<form
 					onSubmit={(e) => {
 						handleFormSubmit(e);
@@ -79,7 +79,7 @@ const LoginPage = () => {
 
 					<div className="my-1">
 						{error && (
-							<p className="text-red-500 text-base font-medium">
+							<p className="text-red-300 text-base font-medium">
 								{"Error: " + error}
 							</p>
 						)}
