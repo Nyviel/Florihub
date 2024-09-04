@@ -86,7 +86,7 @@ body {
 }
 
 .Collapsible__contentInner {
-	border: 1px solid rgb(22 101 52);
+	border: 1px solid rgb(34 197 94);
 }
 
 .Collapsible__trigger {
@@ -94,7 +94,7 @@ body {
 	position: relative;
 	padding: 10px;
 	padding-right: 30px;
-	background: rgb(22 101 52);
+	background: rgb(34 197 94);
 	color: white;
 
 	&:after {
@@ -145,7 +145,7 @@ body {
 	content: "";
 	position: absolute;
 	top: 50%;
-	left: -24.25px; /* Position the dot on the line */
+	left: -25px; /* Position the dot on the line */
 	transform: translateY(-50%);
 	width: 12px; /* Dot size */
 	aspect-ratio: 1;
