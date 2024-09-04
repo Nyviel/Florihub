@@ -1,13 +1,8 @@
 "use client";
 import { Plant } from "@/interfaces/plant";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 
 const PlantCard = ({ plant }: { plant: Plant }) => {
-	const router = useRouter();
-	const handleButtonClick = () => {
-		router.push(`/details?plant=${plant.name}`);
-	};
 	return (
 		<div className="w-full mx-auto h-full bg-gray-900 rounded-lg space-y-4 border border-gray-950 shadow-md shadow-black">
 			<div className="w-full h-[200px] md:h-[400px] overflow-hidden">
@@ -24,7 +19,7 @@ const PlantCard = ({ plant }: { plant: Plant }) => {
 				<h1 className="text-lg md:text-2xl text-center font-semibold">
 					{plant.name}
 				</h1>
-				<p className="text-base md:text-lg text-gray-300 p-2 px-4 text-center">
+				{/* <p className="text-base md:text-lg text-gray-300 p-2 px-4 text-center">
 					{plant.description.substring(
 						0,
 						plant.description.length > 200
@@ -32,7 +27,7 @@ const PlantCard = ({ plant }: { plant: Plant }) => {
 							: plant.description.length
 					)}
 					...
-				</p>
+				</p> */}
 			</div>
 			<div className="text-gray-100 flex justify-center gap-2 flex-wrap px-6">
 				{plant?.tags.map((tag) => (
@@ -45,12 +40,12 @@ const PlantCard = ({ plant }: { plant: Plant }) => {
 				))}
 			</div>
 			<div className="text-center p-6">
-				<button
+				<a
 					className="px-8 py-4 text-lg bg-green-700 rounded-lg"
-					onClick={handleButtonClick}
+					href={`/details?plant=${plant.name}`}
 				>
 					Details
-				</button>
+				</a>
 			</div>
 		</div>
 	);
