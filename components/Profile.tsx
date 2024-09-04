@@ -9,6 +9,9 @@ import { FaArrowLeft } from "react-icons/fa";
 import { toast } from "react-toastify";
 import Spinner from "./Spinner";
 import TrackedPlantCards from "./TrackedPlantsCards";
+import Image from "next/image";
+import DefaultAvatar from "@/assets/images/defaultavatar.png";
+import { Separator } from "./ui/separator";
 
 const Profile = () => {
 	const { data: session } = useSession();
@@ -40,7 +43,7 @@ const Profile = () => {
 	return (
 		<section>
 			<div className="bg-gray-900">
-				<div className="container mx-auto min-h-48 text-center py-24">
+				<div className="container mx-auto min-h-48 text-center pt-24 pb-12">
 					<Link
 						href="/"
 						className="flex items-center text-white hover:underline py-3"
@@ -50,19 +53,37 @@ const Profile = () => {
 					<h1 className="text-3xl font-bold mx-10 mb-10 text-white text-center">
 						Your Profile
 					</h1>
-					<div className="w-full flex flex-col md:flex-row gap-10 items-center justify-center">
+					<div className="w-fit mx-auto pb-8">
+						<Image
+							src={DefaultAvatar}
+							alt="User"
+							height={0}
+							width={0}
+							sizes={"100vw"}
+							className="w-48 h-48 rounded-full"
+						></Image>
+					</div>
+					<div className="w-full md:h-8 flex flex-col md:flex-row gap-10 items-center justify-center">
 						<p className="text-xl text-white w-fit">
 							<span className="font-bold block text-white">
 								Name
 							</span>{" "}
 							{session ? session.user?.name : ""}
 						</p>
+						<Separator
+							orientation="vertical"
+							className="hidden md:block"
+						/>
 						<p className="text-xl  text-white w-fit">
 							<span className="font-bold block text-white">
 								Email
 							</span>{" "}
 							{session ? session.user?.email : ""}
 						</p>
+						<Separator
+							orientation="vertical"
+							className="hidden md:block"
+						/>
 						<p className="text-xl  text-white w-fit">
 							<span className="font-bold block text-white">
 								Created
