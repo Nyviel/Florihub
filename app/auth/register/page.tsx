@@ -46,7 +46,7 @@ const RegisterPage = () => {
 	};
 	return (
 		<section className="min-h-screen w-full flex">
-			<div className="w-full sm:w-1/2 xl:w-1/3 h-full flex justify-center items-start pt-12 bg-green-900 order-2">
+			<div className="w-full sm:w-1/2 xl:w-1/3 h-full flex justify-center items-start pt-12 order-2">
 				<form
 					onSubmit={(e) => {
 						handleFormSubmit(e);
