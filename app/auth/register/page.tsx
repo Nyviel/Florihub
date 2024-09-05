@@ -9,10 +9,12 @@ import { FaArrowRight } from "react-icons/fa";
 import { toast } from "react-toastify";
 
 const RegisterPage = () => {
-	const [email, setEmail] = useState("");
-	const [name, setName] = useState("");
-	const [password, setPassword] = useState("");
-	const [repeatPassword, setRepeatPassword] = useState("");
+	const [fields, setFields] = useState({
+		email: "",
+		name: "",
+		password: "",
+		repeatPassword: "",
+	});
 	const [error, setError] = useState("");
 	const router = useRouter();
 	const { data: session } = useSession();
@@ -25,6 +27,7 @@ const RegisterPage = () => {
 
 	const handleFormSubmit = async (e: FormEvent) => {
 		e.preventDefault();
+		const { email, name, password, repeatPassword } = fields;
 		if (!email || !name || !password || !repeatPassword) {
 			setError("Form fields can't be empty");
 			return;
@@ -51,7 +54,7 @@ const RegisterPage = () => {
 					onSubmit={(e) => {
 						handleFormSubmit(e);
 					}}
-					className="p-8 mt-12 m-6 rounded-lg bg-green-700 min-h-3/4 h-fit  text-center shadow shadow-green-950"
+					className="p-8 mt-12 m-6 rounded-lg bg-green-700 min-h-3/4 h-fit  text-center shadow-lg shadow-green-950"
 				>
 					<h2 className="text-3xl text-center font-semibold mb-6 text-white">
 						Create An Account
@@ -67,7 +70,7 @@ const RegisterPage = () => {
 							placeholder="User Name..."
 							required
 							onChange={(e) => {
-								setName(e.target.value);
+								setFields({ ...fields, name: e.target.value });
 							}}
 							className="w-full p-2 px-4 rounded-md"
 						/>
@@ -80,7 +83,7 @@ const RegisterPage = () => {
 							placeholder="Email address..."
 							required
 							onChange={(e) => {
-								setEmail(e.target.value);
+								setFields({ ...fields, email: e.target.value });
 							}}
 							className="w-full p-2 px-4 rounded-md"
 						/>
@@ -93,7 +96,10 @@ const RegisterPage = () => {
 							placeholder="Password..."
 							required
 							onChange={(e) => {
-								setPassword(e.target.value);
+								setFields({
+									...fields,
+									password: e.target.value,
+								});
 							}}
 							className="w-full p-2 px-4 rounded-md"
 						/>
@@ -106,7 +112,10 @@ const RegisterPage = () => {
 							placeholder="Repeat Password..."
 							required
 							onChange={(e) => {
-								setRepeatPassword(e.target.value);
+								setFields({
+									...fields,
+									repeatPassword: e.target.value,
+								});
 							}}
 							className="w-full p-2 px-4 rounded-md"
 						/>
@@ -120,10 +129,10 @@ const RegisterPage = () => {
 					</div>
 					<div>
 						<button
-							className="text-white bg-green-900 font-bold py-2 px-4 mt-5 mb-2 rounded-full w-full focus:outline-none focus:shadow-outline"
+							className="text-white transition duration-500 bg-green-900 hover:scale-105 font-bold py-2 px-4 mt-5 mb-2 rounded-full w-full focus:outline-none focus:shadow-outline"
 							type="submit"
 						>
-							Register
+							Submit
 						</button>
 						<Link
 							href="/auth/login"
