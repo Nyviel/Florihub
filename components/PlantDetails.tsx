@@ -205,7 +205,7 @@ const PlantDetails = ({ plant }: { plant: Plant | undefined }) => {
 						</ul>
 					</div>
 				</div>
-				<div className="w-full py-10 ml-2">
+				<div className="w-full py-10">
 					{!plantTracked ? (
 						<button
 							onClick={addTrackedPlant}
@@ -223,7 +223,7 @@ const PlantDetails = ({ plant }: { plant: Plant | undefined }) => {
 						</button>
 					)}
 				</div>
-				<div className="w-full pb-10 ml-2">
+				<div className="w-full pb-10">
 					<Collapsible trigger="General Information">
 						<table className="w-full">
 							<tbody>
@@ -250,7 +250,7 @@ const PlantDetails = ({ plant }: { plant: Plant | undefined }) => {
 						</table>
 					</Collapsible>
 				</div>
-				<div className="w-full py-10 ml-2">
+				<div className="w-full py-10">
 					<div className="markdown-body | !bg-transparent">
 						<Markdown remarkPlugins={[remarkGfm]}>
 							{plant?.description}
