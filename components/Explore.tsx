@@ -94,7 +94,7 @@ const Explore = () => {
 				<div>
 					<button
 						type="submit"
-						className="w-full h-12 px-4 py-2 bg-green-700 hover:bg-green-800 rounded"
+						className="w-full h-12 transition ease-in-out duration-1000 px-4 py-2 bg-green-700 hover:bg-green-500 rounded"
 					>
 						Search
 					</button>
