@@ -42,10 +42,10 @@ const LoginPage = () => {
 					onSubmit={(e) => {
 						handleFormSubmit(e);
 					}}
-					className="mt-12 mx-6 p-6 h-fit space-y-8 bg-green-700 rounded-lg shadow shadow-green-950"
+					className="mt-12 mx-6 p-6 h-fit space-y-8 bg-green-700 rounded-lg shadow-lg shadow-green-950"
 				>
 					<h2 className="text-3xl text-center font-semibold mb-6 text-white">
-						Login
+						Login to FloriHub
 					</h2>
 					<hr />
 					<div className="my-6 font-semibold text-center text-white">
@@ -87,10 +87,10 @@ const LoginPage = () => {
 
 					<div className="flex flex-col justify-center items-center">
 						<button
-							className=" text-white bg-green-900 font-bold py-2 px-4 mb-2 rounded-full w-full focus:outline-none focus:shadow-outline"
+							className=" text-white transition duration-500 bg-green-900 hover:scale-105 font-bold py-2 px-4 mb-2 rounded-full w-full focus:outline-none focus:shadow-outline"
 							type="submit"
 						>
-							Login
+							Submit
 						</button>
 						<Link
 							href="/auth/register"
