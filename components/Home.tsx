@@ -82,11 +82,11 @@ const Home = () => {
 
 	return (
 		<section className="flex flex-col md:flex-row h-screen">
-			<div className="w-full h-full flex flex-col items-center justify-center text-white bg-green-900">
-				<h1 className="text-xl md:text-2xl lg:text-3xl lg:leading-10">
+			<div className="w-full h-full flex flex-col items-center justify-center text-white bg-green-900 mt-16 md:mt-0">
+				<h1 className="text-center [font-size:_clamp(1.5em,2.5vw,2.5em)]">
 					Welcome to <span className="text-green-500">Flori</span>Hub
 				</h1>
-				<div className="flex justify-center items-center gap-2 text-xl md:text-2xl lg:text-3xl lg:leading-10 p-2">
+				<div className="flex flex-col sm:flex-row justify-center items-center gap-2 [font-size:_clamp(1.25em,2.5vw,2em)] p-2">
 					Your go to hub for
 					<span className="text-green-400">
 						<Typewriter
@@ -101,7 +101,7 @@ const Home = () => {
 				</div>
 			</div>
 			<div className="w-full h-full flex flex-col items-center justify-center text-white text-center bg-gray-900">
-				<h2 className="text-xl md:text-2xl lg:text-3xl lg:leading-10">
+				<h2 className="text-center [font-size:_clamp(1.25em,2.5vw,2em)]">
 					Learn something new today, <br />
 					select a plant from the form below
 				</h2>
@@ -114,7 +114,7 @@ const Home = () => {
 						}}
 						id="combo-box-demo"
 						options={plantTitles}
-						sx={{ width: 300 }}
+						sx={{ width: 250 }}
 						renderInput={(params) => (
 							<TextField
 								{...params}
@@ -126,7 +126,7 @@ const Home = () => {
 					<button
 						type="button"
 						onClick={handleFormSubmit}
-						className="px-4 py-2 bg-green-700 rounded"
+						className="transition ease-in-out duration-1000 px-4 py-2 bg-green-700 hover:bg-green-500 rounded"
 					>
 						Search
 					</button>
