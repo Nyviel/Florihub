@@ -37,7 +37,7 @@ const LoginPage = () => {
 	};
 	return (
 		<section className="min-h-screen w-full flex">
-			<div className="w-full md:w-1/2 lg:w-1/4 flex justify-center items-start pt-12 ">
+			<div className="w-full md:w-1/2 2xl:w-1/4 flex justify-center items-start pt-12 ">
 				<form
 					onSubmit={(e) => {
 						handleFormSubmit(e);
@@ -102,7 +102,7 @@ const LoginPage = () => {
 					</div>
 				</form>
 			</div>
-			<div className="hidden md:w-1/2 md:block lg:w-3/4 bg-[url('/images/login-thumbnail.webp')] bg-cover bg-center"></div>
+			<div className="hidden md:w-1/2 md:block 2xl:w-3/4 bg-[url('/images/login-thumbnail.webp')] bg-cover bg-center"></div>
 		</section>
 	);
 };
