@@ -59,7 +59,7 @@ const Navigation = () => {
 								</svg>
 							</button>
 						</SheetTrigger>
-						<SheetContent className="bg-green-900 text-white">
+						<SheetContent className="bg-green-950 text-white">
 							<SheetHeader>
 								<SheetTitle className="py-5 text-left text-white">
 									Navigation
