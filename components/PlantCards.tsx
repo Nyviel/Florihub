@@ -8,7 +8,7 @@ const PlantCards = ({ plants }: { plants: Plant[] }) => {
 		console.log(plants);
 	}, [plants]);
 	return (
-		<div
+		<section
 			className={cn(
 				"h-full w-full grid grid-cols-1 gap-4",
 				plants.length <= 1
@@ -25,7 +25,7 @@ const PlantCards = ({ plants }: { plants: Plant[] }) => {
 			) : (
 				<h2 className="text-2xl text-center">No results found</h2>
 			)}
-		</div>
+		</section>
 	);
 };
 export default PlantCards;

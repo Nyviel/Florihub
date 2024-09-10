@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const PlantCard = ({ plant }: { plant: Plant }) => {
 	return (
-		<div className="w-full mx-auto h-full bg-gray-900 rounded-lg space-y-4 border border-gray-950 shadow-md shadow-black">
+		<article className="w-full mx-auto h-full bg-gray-900 rounded-lg space-y-4 border border-gray-950 shadow-md shadow-black">
 			<div className="w-full h-[200px] md:h-[400px] overflow-hidden">
 				<Image
 					src={`/images/${plant.thumbnail}`}
@@ -47,7 +47,7 @@ const PlantCard = ({ plant }: { plant: Plant }) => {
 					Details
 				</a>
 			</div>
-		</div>
+		</article>
 	);
 };
 export default PlantCard;
