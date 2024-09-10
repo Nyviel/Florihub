@@ -38,11 +38,13 @@ const TrackedPlantCard = ({ plant }: { plant: TrackedPlant }) => {
 					className="w-full h-full object-cover object-center border rounded-t-lg border-gray-950"
 				/>
 			</div>
-			<div className="w-full flex pt-2 flex-col justify-center items-center">
-				<h1 className="text-2xl text-white">{plant.name}</h1>
+			<div className="w-full">
+				<h1 className="text-2xl text-white text-center">
+					{plant.name}
+				</h1>
 			</div>
 
-			<div className="text-center pt-2 pb-6 flex gap-5 justify-center text-white">
+			<div className="flex flex-row flex-wrap text-center pt-2 pb-6 gap-5 justify-center text-white">
 				<a
 					className="px-4 py-3 text-base rounded-lg bg-green-700 hover:bg-green-600"
 					href={`/trackedplants?tpid=${plant._id}`}
@@ -51,7 +53,7 @@ const TrackedPlantCard = ({ plant }: { plant: TrackedPlant }) => {
 				</a>
 				<button
 					onClick={removeTrackedPlant}
-					className="px-4 py-3 text-base rounded-lg bg-red-800 hover:bg-red-700"
+					className="px-1 sm:px-4 py-3 text-base rounded-lg bg-red-800 hover:bg-red-700"
 				>
 					Stop Tracking Plant <X className="inline ml-1" />
 				</button>

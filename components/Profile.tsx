@@ -46,7 +46,7 @@ const Profile = () => {
 				<div className="container mx-auto min-h-48 text-center pt-24 pb-12">
 					<Link
 						href="/"
-						className="flex items-center text-white hover:underline py-3"
+						className="flex items-center text-white hover:underline pt-3 pb-6"
 					>
 						<FaArrowLeft className="mr-2" /> Return to Home
 					</Link>
@@ -97,36 +97,34 @@ const Profile = () => {
 					</div>
 				</div>
 			</div>
-			<div className="container m-auto my-12">
-				<div className="px-6 py-8 mb-4 m-4 md:m-0">
-					<div className="flex flex-col md:flex-row">
-						<div className="w-full md:pl-4">
-							<h2 className="text-2xl font-semibold mb-4 text-white">
-								Your tracked plants
-							</h2>
-							{!trackedPlants.length && loading && (
-								<Spinner loading={loading} />
-							)}
-							{!trackedPlants.length && !loading ? (
-								<div>
-									<p className="font-base text-lg mb-5 text-white">
-										There are no plants being tracked yet.
-										<br /> Track your first plant by
-										clicking the button below.
-									</p>
-									<Link
-										href="/explore"
-										className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
-									>
-										Explore!
-									</Link>
-								</div>
-							) : (
-								<div className="w-full">
-									<TrackedPlantCards plants={trackedPlants} />
-								</div>
-							)}
-						</div>
+			<div className="w-full px-2 sm:mx-0 sm:container mx-auto my-12">
+				<div className="flex flex-col md:flex-row">
+					<div className="relative w-full md:pl-4">
+						<h2 className="text-2xl font-semibold mb-4 text-white">
+							Your tracked plants
+						</h2>
+						{!trackedPlants.length && loading && (
+							<Spinner loading={loading} />
+						)}
+						{!trackedPlants.length && !loading ? (
+							<div>
+								<p className="font-base text-lg mb-5 text-white">
+									There are no plants being tracked yet.
+									<br /> Track your first plant by clicking
+									the button below.
+								</p>
+								<Link
+									href="/explore"
+									className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
+								>
+									Explore!
+								</Link>
+							</div>
+						) : (
+							<div className="w-full">
+								<TrackedPlantCards plants={trackedPlants} />
+							</div>
+						)}
 					</div>
 				</div>
 			</div>

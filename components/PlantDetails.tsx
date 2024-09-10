@@ -80,11 +80,11 @@ const PlantDetails = ({ plant }: { plant: Plant | undefined }) => {
 		<Gallery>
 			<section className="container mx-auto h-fit text-white">
 				<div className="w-full">
-					<h1 className="flex-1 text-center text-2xl lg:text-4xl pt-32 pb-8 font-semibold">
+					<h1 className="text-center text-2xl lg:text-4xl pt-32 pb-8 font-semibold">
 						{plant?.name}
 					</h1>
 				</div>
-				<div className="w-full flex flex-col sm:flex-row mt-10 shadow-md shadow-black">
+				<div className="w-full h-fit flex flex-col sm:flex-row mt-10 shadow-md shadow-black">
 					{plant?.images.length === 1 ? (
 						<Item
 							original={`/images/${plant?.images[0]}`}
@@ -106,7 +106,7 @@ const PlantDetails = ({ plant }: { plant: Plant | undefined }) => {
 							)}
 						</Item>
 					) : (
-						<div className="grid grid-cols-2 gap-4">
+						<div className="sm:grid sm:grid-cols-2 space-y-2 sm:space-y-0 sm:gap-2">
 							{plant?.images.map((image, index) => {
 								return (
 									<div
