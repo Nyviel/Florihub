@@ -62,7 +62,7 @@ const Navigation = () => {
 						<SheetContent className="bg-green-900 text-white">
 							<SheetHeader>
 								<SheetTitle className="py-5 text-left text-white">
-									Mobile menu
+									Navigation
 								</SheetTitle>
 							</SheetHeader>
 							<Separator />
