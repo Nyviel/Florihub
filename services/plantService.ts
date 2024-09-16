@@ -1,6 +1,5 @@
 import { Plant } from "@/interfaces/plant";
-
-const api = "http://localhost:3000/api";
+import { api } from "@/utils/constants";
 
 interface PlantPaginationType {
 	plants: Plant[];

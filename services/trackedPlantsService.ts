@@ -1,6 +1,5 @@
 import { TrackedPlant } from "@/interfaces/trackedPlant";
-
-const api = "http://localhost:3000/api";
+import { api } from "@/utils/constants";
 
 interface TrackedPlantPaginationType {
 	trackedPlants: TrackedPlant[];

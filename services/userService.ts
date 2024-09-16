@@ -1,17 +1,15 @@
 import { User, UserPost } from "@/interfaces/user";
-import { Session } from "next-auth";
-
-const API = "http://localhost:3000/api";
+import { api } from "@/utils/constants";
 
 export const postUser = async (user: UserPost): Promise<Response> => {
-	return fetch(`${API}/auth/users`, {
+	return fetch(`${api}/auth/users`, {
 		method: "POST",
 		body: JSON.stringify(user),
 	});
 };
 
 export const fetchUsers = async (): Promise<User[] | null> => {
-	const response = await fetch(`${API}/auth/users`);
+	const response = await fetch(`${api}/auth/users`);
 	if (response.ok) {
 		return response.json();
 	} else {
