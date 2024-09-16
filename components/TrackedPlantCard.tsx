@@ -1,19 +1,15 @@
 "use client";
 import { TrackedPlant } from "@/interfaces/trackedPlant";
 import { deleteTrackedPlant } from "@/services/trackedPlantsService";
-import { BookOpen, Calendar, Cross, Minus, X } from "lucide-react";
+import { Calendar, X } from "lucide-react";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
 const TrackedPlantCard = ({ plant }: { plant: TrackedPlant }) => {
 	const [isRemoved, setIsRemoved] = useState(false);
 	const { data: session } = useSession();
-	const router = useRouter();
-	const handleButtonClick = () => {
-		router.push(`/trackedplants?tpid=${plant._id}`);
-	};
+
 	const removeTrackedPlant = async () => {
 		if (!plant?._id || !session?.user.id) return;
 		try {

@@ -3,8 +3,8 @@
 import { Plant } from "@/interfaces/plant";
 import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
+import { FaBinoculars, FaClipboard, FaEdit, FaTrash } from "react-icons/fa";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -13,7 +13,7 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { FaBinoculars, FaClipboard, FaEdit, FaTrash } from "react-icons/fa";
+
 export const columns: ColumnDef<Plant>[] = [
 	{
 		id: "actions",
